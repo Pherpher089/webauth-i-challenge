@@ -1,0 +1,15 @@
+{
+	"name": "webauth-i-challenge",
+	"version": "1.0.0",
+	"description": "Challange for intro to auth and sessions and cookies",
+	"main ": "index.js",
+	"scripts": {
+		"server": "nodemon index.js"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"knex": "^0.19.2",
+		"nodemon": "^1.19.1",
+		"sqlite3": "^4.1.0"
+	}
+}
