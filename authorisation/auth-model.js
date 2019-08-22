@@ -3,6 +3,7 @@ const db = require("../db-config.js");
 module.exports = {
 	register,
 	getUsers,
+	findUser,
 };
 
 function register(creds) {
@@ -11,4 +12,8 @@ function register(creds) {
 
 function getUsers() {
 	return db("credentials");
+}
+
+function findUser(username) {
+	return db("credentials").where({ username });
 }
