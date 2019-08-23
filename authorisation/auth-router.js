@@ -31,12 +31,17 @@ router.get("/users", async (req, res) => {
 
 router.post("/login", async (req, res) => {
 	const passGuess = req.body.password;
+
 	console.log(`pass guess = ${passGuess}`);
 	try {
-		const user = await db.findUser(req.body.username);
+		const [user] = await db.findUser(req.body.username);
 		console.log(user.username);
+
 		if (user && bcrypt.compareSync(passGuess, user.password)) {
-			res.status(200).json({ message: `Welcom ${user.username}` });
+			req.session.user = user;
+			res
+				.status(200)
+				.json({ message: `Welcom ${user.username}! have a cookie` });
 		} else {
 			res.status(401).json({ message: "invalid credentials" });
 		}
