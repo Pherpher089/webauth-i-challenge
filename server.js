@@ -1,6 +1,7 @@
 //import express
 const express = require("express");
 const session = require("express-session");
+const knexSessionStore = require("connect-session-knex")(session);
 const cors = require("cors");
 const helmet = require("helmet");
 //import router
@@ -16,6 +17,13 @@ const sessionOptions = {
 	},
 	resave: false,
 	saveUninitalized: false,
+	store: new knexSessionStore({
+		knex: require("./db-config.js"),
+		tablename: "sessions",
+		sidfieldname: "sid",
+		createtable: true,
+		clearinterval: 1000 * 60 * 60, //an hour
+	}),
 };
 
 //set up server object with express
